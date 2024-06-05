@@ -12,6 +12,7 @@ import androidx.room.withTransaction
 import com.example.pagingcompose.data.local.BreweryDb
 import com.example.pagingcompose.data.local.BreweryEntity
 import com.example.pagingcompose.data.mappers.toBreweryEntity
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import java.io.IOException
 
@@ -35,11 +36,19 @@ class BreweryRemoteMediator(
                 LoadType.APPEND -> {
                     val lastItem = state.lastItemOrNull()
                     if (lastItem == null){
-                        MediatorResult.Success(true)
+                        1
+                    }else{
+                        var count = 0
+                        coroutineScope {
+                            count = breweryDb.getBreweryDao().getCount()
+                        }
+
+                        (count / state.config.pageSize) +1
                     }
-                    state.pages.lastOrNull(){
-                        it.data.isNotEmpty()
-                    }?.nextKey ?: (state.pages.size+1)
+//                    state.pages.lastOrNull(){
+//                        it.data.isNotEmpty()
+//                    }?.nextKey ?: (state.pages.size+1)
+
                 }
             }
 

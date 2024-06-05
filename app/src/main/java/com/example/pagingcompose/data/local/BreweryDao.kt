@@ -15,6 +15,9 @@ interface BreweryDao {
     @Query("SELECT * FROM breweryentity")
     fun pagingSource() : PagingSource<Int, BreweryEntity>
 
+    @Query("SELECT COUNT(*) FROM breweryentity")
+    suspend fun getCount() : Int
+
     @Query("DELETE FROM breweryentity")
     suspend fun clearAllData()
 

@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.example.pagingcompose.domain.Brewery
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 
 @Composable
@@ -35,12 +36,13 @@ fun BreweryScreen(
     }
 
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
     ){
         if(breweries.loadState.refresh is LoadState.Loading){
-//            CircularProgressIndicator(
-//                modifier = Modifier.align(Alignment.Center)
-//            )
+            CircularProgressIndicator(
+                modifier = Modifier
+                )
         }else{
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
@@ -56,7 +58,9 @@ fun BreweryScreen(
 
                 item {
                     if(breweries.loadState.append is LoadState.Loading){
-//                        CircularProgressIndicator()
+                        CircularProgressIndicator(
+                            modifier = Modifier
+                            )
                     }
                 }
 

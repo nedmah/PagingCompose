@@ -33,7 +33,6 @@ object AppModule {
         ).build()
     }
 
-
     @Provides
     @Singleton
     fun provideBeerApi(): BreweryApi {
